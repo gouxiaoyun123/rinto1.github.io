@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rmd on rinto blog</title>
+    <link>/tags/rmd/</link>
+    <description>Recent content in Rmd on rinto blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ch</language>
+    <copyright>My Name</copyright>
+    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rmd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>maping</title>
+      <link>/2020/03/29/2020-04-08-maping/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/29/2020-04-08-maping/</guid>
+      <description>绘制加拿大疫情分布地图
+导入包和设置工作路径library(ggplot2)library(dplyr)setwd(&amp;#39;C:/Users/33817/Desktop/italiy/test/drawings&amp;#39;)读取加拿大JSON地图，转成sf对象url &amp;lt;- &amp;quot;https://code.highcharts.com/mapdata/countries/ca/ca-all.geo.json&amp;quot;cajson &amp;lt;- sf::read_sf(url)编写地图绘制函数p读入疫情数据csv，提取疫情具体某一天的数据left_join函数通过name进行左连接，将疫情数据confirm写入JSON数据cajson中将疫情数据进行分级划分，划分为“0”，“0-10”,“10-100”,“&amp;gt;100”(如果有NA值，设置为‘0’）ggplot进行绘图，参数设置：geom_sf:size设置边界线的粗细，aes映射用confirm列的数据进行填充scale_fill_manual手动设置分级填充，name设置名称，values设置颜色labs设置地图的参数：title设置地图的大标题guides设置图例格式：ncol=1设置图例的列数。ggsave把绘图的成果保存到本地p &amp;lt;- function(){data &amp;lt;- read.csv(&amp;#39;C:/Users/33817/Desktop/italiy/test/data.csv&amp;#39;,as.is=T )%&amp;gt;% as_tibble()%&amp;gt;%select(name=id,confirm=x)#x is A column of epidemic data#Write epidemic data into JSON datacajson &amp;lt;- cajson %&amp;gt;%left_join(data,by=c(&amp;#39;name&amp;#39;=&amp;#39;name&amp;#39;))%&amp;gt;%mutate(confirm = cut(confirm,breaks=c(0,0.9,9.9,99.9,1000),labels=c(&amp;#39;0&amp;#39;,&amp;#39;1~10&amp;#39;,&amp;#39;10~100&amp;#39;,&amp;#39;&amp;gt;100&amp;#39;),))%&amp;gt;%mutate(confirm = as.character(confirm),confirm = case_when(is.</description>
+    </item>
+    
+  </channel>
+</rss>

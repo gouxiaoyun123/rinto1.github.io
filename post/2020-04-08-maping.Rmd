@@ -1,0 +1,93 @@
+---
+title: maping
+author: gouxiaoyun
+date: '2020-03-29'
+slug: maping
+categories:
+  - R
+tags:
+  - Rmd
+description: ''
+---
+ 绘制加拿大疫情分布地图
+
+## 导入包和设置工作路径
+
+```{r,eval=FALSE}
+library(ggplot2)
+library(dplyr)
+setwd('C:/Users/33817/Desktop/italiy/test/drawings')
+```
+
+## 读取加拿大JSON地图，转成sf对象
+
+```{r,eval=FALSE}
+url <- "https://code.highcharts.com/mapdata/countries/ca/ca-all.geo.json"
+cajson <- sf::read_sf(url)
+```
+
+## 编写地图绘制函数p
+- 读入疫情数据csv，提取疫情具体某一天的数据
+- left_join函数通过name进行左连接，将疫情数据confirm写入JSON数据cajson中
+- 将疫情数据进行分级划分，划分为"0"，"0-10","10-100",">100"(如果有NA值，设置为‘0’）
+- ggplot进行绘图，参数设置：
+  - geom_sf:size设置边界线的粗细，aes映射用confirm列的数据进行填充
+  - scale_fill_manual手动设置分级填充，name设置名称，values设置颜色
+  - labs设置地图的参数：title设置地图的大标题
+  - guides设置图例格式：ncol=1设置图例的列数。
+- ggsave把绘图的成果保存到本地
+
+```{r,eval=FALSE}
+p <- function(){
+  data <- read.csv('C:/Users/33817/Desktop/italiy/test/data.csv',as.is=T )%>% 
+    as_tibble()%>%
+    select(name=id,confirm=x)#x is A column of epidemic data
+   
+#Write epidemic data into JSON data
+  cajson <- cajson %>%
+    left_join(data,by=c('name'='name'))%>%
+    mutate(
+      confirm = cut(confirm,
+                    breaks=c(0,0.9,9.9,99.9,1000),
+                    labels=c('0','1~10','10~100','>100'),
+                    )
+    )%>%
+    mutate(
+      confirm = as.character(confirm),
+      confirm = case_when(
+        is.na(confirm)~'0',
+        T~confirm
+      )#If there is Na value, write Na as 'wu'
+    )
+    
+a <- ggplot(cajson) +
+    geom_sf(size=0.5,aes(fill=confirm)) +
+    scale_fill_manual(name='confirm_number',
+                      values=c(
+                        '0'='#ffffff',
+                        '1~10'='#fcae91',
+                        '10~100'='#fb6a4a',
+                        '>100'='#cb181d'
+                      ))+  #Manual grading and coloring
+    labs(title='Covid19-Canada',
+         caption = 'czxa.top')+#Set map name 
+    guides(fill=guide_legend(ncol=1))+#Set legend
+    labs(fill='lll')+
+    theme_bw()+
+    theme(plot.title = element_text(hjust = 0.5))
+print(a)
+file=paste0('a-',i,'.png')
+ggsave(a,filename=file,width = 12,height = 9)
+}
+```
+
+## for循环批量下载图片
+
+```{r,eval=FALSE}
+for(i in 5:73){
+  x <- i+6
+  p()
+}
+```
+
+日期：2020年1月22日——2020年3月29日
