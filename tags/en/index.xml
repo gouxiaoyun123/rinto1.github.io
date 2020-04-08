@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>En on rinto blog</title>
+    <link>/tags/en/</link>
+    <description>Recent content in En on rinto blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ch</language>
+    <copyright>My Name</copyright>
+    <lastBuildDate>Wed, 08 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/en/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Englishpod 30-60</title>
+      <link>/2020/04/08/2020-04-08-englishpod-30-60/</link>
+      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/08/2020-04-08-englishpod-30-60/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Englishpod1-30</title>
+      <link>/2020/04/08/2020-04-08-englishpod1-30/</link>
+      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/08/2020-04-08-englishpod1-30/</guid>
+      <description>(1) Difficult Customer 1 I’m still working on it I still need more time.
+ E1: A: Did you finish reading the magazine? B: I’m still working it. E2: C: Did you fix my car? D: I’m still working on it.  2 coke and fries It’s a short way of saying “Coca-Cola and French fries”
+3 complementary glass of wine Complementary means it’s free.
+4 I’ll go with  I’ll choose I’ll take  5 grab go grab means go get quickly.</description>
+    </item>
+    
+  </channel>
+</rss>
